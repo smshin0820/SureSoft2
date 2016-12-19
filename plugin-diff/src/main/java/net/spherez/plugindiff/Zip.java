@@ -94,9 +94,4 @@ public class Zip {
 
 	} // archive end
 
-	public static void main(String[] args) throws IOException {
-		Zip zipTest = new Zip(new PluginInfo("C:\\diffLogs"), "C:\\diffLogs\\diff.txt");
-		zipTest.archive();
-	}
-
 }

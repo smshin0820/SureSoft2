@@ -18,5 +18,12 @@ public class Main {
 		PluginInfo pd2 = new PluginInfo(args[1]);
 
 		pd1.diff(pd2);
+
+		/*String diffTextPath = System.getProperty("user.dir")+"\\diffLogs\\diff.txt";
+*/
+		String diffTextPath = "C:\\Users\\Kyoungin\\IdeaProjects\\patch\\plugin-diff\\diffLogs\\diff.txt";
+
+		Zip zipTest = new Zip(pd2, diffTextPath);
+		zipTest.archive();
 	}
 }
