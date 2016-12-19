@@ -25,6 +25,14 @@ public class PluginInfo {
 		return map;
 	}
 
+	public String getRootPathInput() {
+		return rootPathInput;
+	}
+
+	public String getRootPathReal() {
+		return rootPathReal;
+	}
+
 	public PluginInfo(String path) throws IOException {
 		this.rootPathInput = path;
 		this.rootPathReal = new File(path).getAbsolutePath();
