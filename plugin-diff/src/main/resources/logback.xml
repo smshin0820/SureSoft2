@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
+    <property name="PATCH_GENERATOR_HOME" value="diffLogs"/>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <append>true</append>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${PATCH_GENERATOR_HOME}\diff.txt</file>
+
+        <encoder>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
 
     <root level="debug">
+        <appender-ref ref="FILE"/>
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
