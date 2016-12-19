@@ -16,17 +16,13 @@ public class Zip {
 	private PluginInfo plugin;
 	private String logFile = "";
 
-	public Zip(PluginInfo plugin, String filePath) {
+	public Zip(PluginInfo plugin, String logFile) {
 		this.plugin = plugin;
-		this.logFile = filePath;
+		this.logFile = logFile;
 	}
 
-	public String getFilePath() {
+	public String getLogFile() {
 		return logFile;
-	}
-
-	public void setFilePath(String filePath) {
-		this.logFile = filePath;
 	}
 
 	public void archive() {
@@ -34,8 +30,8 @@ public class Zip {
 		// ArrayList에 담겨있는 애들만 압축하기
 		// 압축이 필요한 파일만 fileList에 넣기
 		ArrayList<String> fileList = new ArrayList<>();
-		String zipFileName = plugin.getRootPathInput() + "\\patch.zip";
-
+		String zipFileName = System.getProperty("user.dir")+"\\diffLogs\\patch.zip";
+		
 		FileReader fr = null;
 		BufferedReader br = null;
 
@@ -67,10 +63,10 @@ public class Zip {
 		byte[] buf = new byte[4096];
 
 		try {
+			System.out.println("Zip.java zipFileName : " + zipFileName);
 			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName));
 
 			for (String file : fileList) {
-				System.out.println(file);
 				FileInputStream in = new FileInputStream(file);
 				Path p = Paths.get(file);
 				String fileName = p.getFileName().toString();
@@ -82,7 +78,6 @@ public class Zip {
 				while ((len = in.read(buf)) > 0) {
 					out.write(buf, 0, len);
 				}
-
 				out.closeEntry();
 				in.close();
 			}
