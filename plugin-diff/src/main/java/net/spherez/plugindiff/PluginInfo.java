@@ -14,9 +14,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by KYOUNGIN on 2016. 12. 18..
- */
 public class PluginInfo {
 
 	private final Logger logger = LoggerFactory.getLogger(PluginInfo.class);
@@ -26,14 +23,6 @@ public class PluginInfo {
 
 	public Map<String, String> getMap() {
 		return map;
-	}
-
-	public String getRootPathReal() {
-		return rootPathReal;
-	}
-
-	public String getRootPathInput() {
-		return rootPathInput;
 	}
 
 	public PluginInfo(String path) throws IOException {
@@ -47,16 +36,13 @@ public class PluginInfo {
 		Map<String, String> map = new HashMap<>();
 
 		File[] files = new File(path).listFiles();
-
 		if (files != null) {
 			for (File file : files) {
 				if (file.isFile()) {
 					FileInputStream fis = new FileInputStream(file.getCanonicalFile());
-
 					map.put(file.getCanonicalPath().replace(rootPath, ""), DigestUtils.md5Hex(fis));
-
 					fis.close();
-				} else if (file.isDirectory()) {
+				} else if(file.isDirectory()) {
 					map.putAll(getFileList(rootPath, file.getCanonicalPath()));
 				}
 			}
@@ -65,70 +51,36 @@ public class PluginInfo {
 		return map;
 	}
 
-	// lhd : version2
-	public void diff(PluginInfo lhd) throws IOException {
+	public void diff(PluginInfo lhd) {
 
 		// copy hashmap
 		Map<String, String> lhdMap = new HashMap<>();
 		lhdMap.putAll(lhd.getMap());
 
-		for (String key : map.keySet()) {
-			if (lhdMap.containsKey(key)) {
-				if (map.get(key).equals(lhdMap.get(key))) {
+		for(String key : map.keySet()) {
+			if(lhdMap.containsKey(key))  {
+				if(map.get(key).equals(lhdMap.get(key))) {
 					// equal
-					logger.debug("EQUAL: {}", key);
+					//logger.debug("EQUAL: {}", key);
 				} else {
 					// modified
-					logger.debug("MODIFIED: {}", key);
-					System.out.println(rootPathInput + key + " (*)");
-					printContent(rootPathInput + key);
+					logger.debug("[*] {}", key);
+					//	System.out.println(rootPathInput + key + " (*)");
 				}
 
 				lhdMap.remove(key);
 			} else {
 				// removed
-				logger.debug("REMOVED: {}", key);
-				System.out.println(rootPathInput + key + " (-)");
+				logger.debug("[-] {}", key);
+				//System.out.println(rootPathInput + key + " (-)");
 			}
 		}
 
-		for (String key : lhdMap.keySet()) {
+		for(String key : lhdMap.keySet()) {
 			// added
-			logger.debug("ADDED: {}", key);
-			System.out.println(rootPathInput + key + " (+)");
+			logger.debug("[+] {}", key);
+			//System.out.println(rootPathInput + key + " (+)");
 		}
 	}
-
-	public void printContent(String fileName) throws IOException {
-		FileReader fr = null;
-		BufferedReader br = null;
-
-		String str = "";
-		String line = null;
-
-		try {
-			fr = new FileReader(fileName);
-			br = new BufferedReader(fr);
-
-			while ((line = br.readLine()) != null) {
-				// 파일 내용 출력
-				// System.out.println(str); 
-				str += line;
-			}
-
-			if (fr != null) {
-				fr.close();
-			}
-			if (br != null) {
-				br.close();
-			}
-			
-			char writeTxt[] = new char[str.length()];
-			FileWriter fw = new FileWriter("");
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	} // printContent end
 
 }
