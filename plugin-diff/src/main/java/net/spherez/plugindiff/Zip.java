@@ -72,12 +72,10 @@ public class Zip {
 		byte[] buf = new byte[4096];
 
 		try {
-			System.out.println("zipFileName : " + zipFileName);
 			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName));
 			
 			boolean firstFlag = true;
 			for (String file : fileList) {
-				System.out.println("before : " + file);
 				FileInputStream in = new FileInputStream(file);
 				if(firstFlag){
 					firstFlag = false;
@@ -86,7 +84,6 @@ public class Zip {
 				}else{
 					file = file.substring(plugin.getRootPathInput().length());
 				}
-				System.out.println("after : " + file);
 				
 				ZipEntry ze = new ZipEntry(file);
 				out.putNextEntry(ze);
