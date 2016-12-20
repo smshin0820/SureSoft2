@@ -53,7 +53,7 @@ public class Zip {
 			
 			while ((read = br.readLine()) != null) {
 				if (read.substring(1, 2).equals("*") || read.substring(1, 2).endsWith("+")) {
-					fileList.add(plugin.getRootPathInput() + read.substring(4));
+					fileList.add(plugin.getRootPathInput() + read.substring(3));
 				}
 			}
 
