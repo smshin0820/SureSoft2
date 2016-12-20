@@ -22,10 +22,6 @@ public class Zip {
 		this.logFile = logFile;
 	}
 
-	public String getLogFile() {
-		return logFile;
-	}
-
 	public void archive() {
 		// +, *인 경우만 ArrayList에 담기
 		// ArrayList에 담겨있는 애들만 압축하기
