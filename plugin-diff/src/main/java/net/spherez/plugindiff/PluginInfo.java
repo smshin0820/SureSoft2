@@ -21,22 +21,28 @@ public class PluginInfo {
 	private final String rootPathReal;
 	private Map<String, String> map = new HashMap<>();
 
-	public Map<String, String> getMap() {
-		return map;
-	}
-
-	public String getRootPathInput() {
-		return rootPathInput;
-	}
-
-	public String getRootPathReal() {
-		return rootPathReal;
-	}
-
 	public PluginInfo(String path) throws IOException {
-		this.rootPathInput = path;
-		this.rootPathReal = new File(path).getAbsolutePath();
-		this.map = getFileList(rootPathReal, path);
+
+		if (fileIsLive(path)) {
+			this.rootPathInput = path;
+			this.rootPathReal = new File(path).getAbsolutePath();
+			this.map = getFileList(rootPathReal, path);
+		} else {
+			this.rootPathInput = null;
+			this.rootPathReal = null;
+			System.out.println("존재하지 않은 파일 입니다. 다시 확인해 주세요");
+			System.exit(1);
+		}
+	}
+
+	public static Boolean fileIsLive(String isLivefile) {
+		File f1 = new File(isLivefile);
+		
+		if (f1.exists()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private static Map<String, String> getFileList(String rootPath, String path) throws IOException {
@@ -50,13 +56,25 @@ public class PluginInfo {
 					FileInputStream fis = new FileInputStream(file.getCanonicalFile());
 					map.put(file.getCanonicalPath().replace(rootPath, ""), DigestUtils.md5Hex(fis));
 					fis.close();
-				} else if(file.isDirectory()) {
+				} else if (file.isDirectory()) {
 					map.putAll(getFileList(rootPath, file.getCanonicalPath()));
 				}
 			}
 		}
 
 		return map;
+	}
+
+	public Map<String, String> getMap() {
+		return map;
+	}
+
+	public String getRootPathInput() {
+		return rootPathInput;
+	}
+
+	public String getRootPathReal() {
+		return rootPathReal;
 	}
 
 	public void diff(PluginInfo lhd) {
