@@ -37,6 +37,8 @@ public class Zip {
 
 		String read = null;
 
+		fileList.add(logFile);
+		
 		try {
 			fr = new FileReader(logFile);
 			br = new BufferedReader(fr);
@@ -63,7 +65,6 @@ public class Zip {
 		byte[] buf = new byte[4096];
 
 		try {
-			System.out.println("Zip.java zipFileName : " + zipFileName);
 			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName));
 			
 			for (String file : fileList) {
@@ -80,7 +81,7 @@ public class Zip {
 				}
 				out.closeEntry();
 				in.close();
-			}
+			} // for end
 			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
