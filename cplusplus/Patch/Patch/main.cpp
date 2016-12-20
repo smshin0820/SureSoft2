@@ -43,6 +43,7 @@ int main() {
 		}
 	}
 	myReadFile.close();
+	std::remove(targetPath.append("\\diff.txt").c_str());
 
 	return 0;
 }
