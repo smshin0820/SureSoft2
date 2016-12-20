@@ -19,10 +19,8 @@ public class Main {
 
 		pd1.diff(pd2);
 
-		/*String diffTextPath = System.getProperty("user.dir")+"\\diffLogs\\diff.txt";*/
 		String diffTextPath = System.getProperty("user.dir")+"\\diffLogs\\diff.txt";
 		
-		System.out.println("Main diffTextPath : " + diffTextPath);
 		Zip zipTest = new Zip(pd2, diffTextPath);
 		zipTest.archive();
 	}

@@ -40,8 +40,8 @@ public class Zip {
 		try {
 			fr = new FileReader(logFile);
 			br = new BufferedReader(fr);
-			System.out.println("root path :  " + plugin.getRootPathInput());
-			System.out.println("alzip fileName : " + zipFileName);
+			
+			
 			while ((read = br.readLine()) != null) {
 				if (read.substring(1, 2).equals("*") || read.substring(1, 2).endsWith("+")) {
 					fileList.add(plugin.getRootPathInput() + read.substring(4));
@@ -65,7 +65,7 @@ public class Zip {
 		try {
 			System.out.println("Zip.java zipFileName : " + zipFileName);
 			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName));
-
+			
 			for (String file : fileList) {
 				FileInputStream in = new FileInputStream(file);
 				Path p = Paths.get(file);
