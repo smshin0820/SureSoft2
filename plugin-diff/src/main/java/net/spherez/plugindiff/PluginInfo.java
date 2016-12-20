@@ -94,14 +94,12 @@ public class PluginInfo {
 			} else {
 				// removed
 				logger.debug("[-]{}", key);
-				//System.out.println(rootPathInput + key + " (-)");
 			}
 		}
 
 		for(String key : lhdMap.keySet()) {
 			// added
 			logger.debug("[+]{}", key);
-			//System.out.println(rootPathInput + key + " (+)");
 		}
 	}
 
