@@ -30,14 +30,13 @@ public class PluginInfo {
 		} else {
 			this.rootPathInput = null;
 			this.rootPathReal = null;
-			System.out.println("존재하지 않은 파일 입니다. 다시 확인해 주세요");
+			System.out.println("Not exit File");
 			System.exit(1);
 		}
 	}
 
 	public static Boolean fileIsLive(String isLivefile) {
 		File f1 = new File(isLivefile);
-		
 		if (f1.exists()) {
 			return true;
 		} else {
@@ -85,26 +84,23 @@ public class PluginInfo {
 
 		for(String key : map.keySet()) {
 			if(lhdMap.containsKey(key))  {
-				if(map.get(key).equals(lhdMap.get(key))) {
-					// equal
-					//logger.debug("EQUAL: {}", key);
-				} else {
+				if (!map.get(key).equals(lhdMap.get(key))) {
 					// modified
-					logger.debug("[*] {}", key);
+					logger.debug("[*]{}", key);
 					//	System.out.println(rootPathInput + key + " (*)");
 				}
 
 				lhdMap.remove(key);
 			} else {
 				// removed
-				logger.debug("[-] {}", key);
+				logger.debug("[-]{}", key);
 				//System.out.println(rootPathInput + key + " (-)");
 			}
 		}
 
 		for(String key : lhdMap.keySet()) {
 			// added
-			logger.debug("[+] {}", key);
+			logger.debug("[+]{}", key);
 			//System.out.println(rootPathInput + key + " (+)");
 		}
 	}
