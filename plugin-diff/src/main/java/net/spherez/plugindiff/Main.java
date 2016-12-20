@@ -2,9 +2,6 @@ package net.spherez.plugindiff;
 
 import java.io.IOException;
 
-/**
- * Created by KYOUNGIN on 2016. 12. 18..
- */
 public class Main {
 
 	public static void main(String[] args) throws IOException {
@@ -21,8 +18,9 @@ public class Main {
 
 		/*String diffTextPath = System.getProperty("user.dir")+"\\diffLogs\\diff.txt";*/
 		String diffTextPath = System.getProperty("user.dir")+"\\diffLogs\\diff.txt";
-		
+
 		System.out.println("Main diffTextPath : " + diffTextPath);
+
 		Zip zipTest = new Zip(pd2, diffTextPath);
 		zipTest.archive();
 	}

@@ -12,7 +12,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>${PATCH_GENERATOR_HOME}\diff.txt</file>
-
+        <append>false</append>
         <encoder>
             <pattern>%msg%n</pattern>
         </encoder>
