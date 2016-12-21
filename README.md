@@ -6,7 +6,7 @@
 ###[-][directory_path] 해당 파일 삭제
 ###[*][directory_path] 해당 파일 수정 을 의미
 -----------------------------------------------------------------------------------------------------------
-### ex
+### ex) diff.txt
 ####[+]\drive.py
 ####[-]\setting\dirveSetting.py
 ####[*]\setting\userSetting.py
