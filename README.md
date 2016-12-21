@@ -4,10 +4,9 @@
 
 ###[+][directory_path] 해당 파일 추가
 ###[-][directory_path] 해당 파일 삭제
-###[*][directory_path] 해당 파일 수정 을 의미하는 기호들입니다.
-
+###[*][directory_path] 해당 파일 수정 을 의미
 -----------------------------------------------------------------------------------------------------------
-###<ex>
+### ex
 ####[+]\drive.py
 ####[-]\setting\dirveSetting.py
 ####[*]\setting\userSetting.py
